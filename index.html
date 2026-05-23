@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>试题图形化解答器</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <section class="workbench" aria-label="试题图形化解答器">
+        <aside class="panel input-panel">
+          <div class="title-row">
+            <div>
+              <p class="eyebrow">STEM Visual Solver</p>
+              <h1>试题图形化解答器</h1>
+            </div>
+            <button id="clearBtn" class="icon-button" type="button" title="清空输入">
+              <span aria-hidden="true">×</span>
+              <span class="sr-only">清空输入</span>
+            </button>
+          </div>
+
+          <label class="field-label" for="paperInput">输入试卷或试题</label>
+          <textarea
+            id="paperInput"
+            spellcheck="false"
+            placeholder="可输入一道题，也可输入多道题。多题可用空行、1.、2. 分隔。"
+          ></textarea>
+
+          <div class="quick-panel">
+            <p class="field-label">示例题</p>
+            <div class="sample-grid">
+              <button class="sample-button" type="button" data-sample="math">函数交点</button>
+              <button class="sample-button" type="button" data-sample="physics">斜面受力</button>
+              <button class="sample-button" type="button" data-sample="chemistry">实验装置</button>
+              <button class="sample-button" type="button" data-sample="paper">混合小卷</button>
+            </div>
+          </div>
+
+          <div class="controls">
+            <fieldset class="segmented" aria-label="学科设置">
+              <legend>学科</legend>
+              <label>
+                <input type="radio" name="subject" value="auto" checked />
+                <span>自动</span>
+              </label>
+              <label>
+                <input type="radio" name="subject" value="math" />
+                <span>数学</span>
+              </label>
+              <label>
+                <input type="radio" name="subject" value="physics" />
+                <span>物理</span>
+              </label>
+              <label>
+                <input type="radio" name="subject" value="chemistry" />
+                <span>化学</span>
+              </label>
+            </fieldset>
+
+            <label class="toggle">
+              <input id="showHints" type="checkbox" checked />
+              <span class="toggle-ui" aria-hidden="true"></span>
+              <span>显示学习提示</span>
+            </label>
+          </div>
+
+          <div class="action-row">
+            <button id="solveBtn" class="primary-button" type="button">生成图形化解答</button>
+            <button id="printBtn" class="secondary-button" type="button">打印 / 保存 PDF</button>
+          </div>
+
+          <div class="status-row" aria-live="polite">
+            <span id="statusBadge" class="badge">等待输入</span>
+            <span id="questionCount">0 题</span>
+          </div>
+        </aside>
+
+        <section class="results-panel" aria-label="解答结果">
+          <div class="results-header">
+            <div>
+              <p class="eyebrow">Solution Board</p>
+              <h2>图形化解答</h2>
+            </div>
+            <button id="copyBtn" class="secondary-button" type="button">复制文字解答</button>
+          </div>
+
+          <div id="results" class="results">
+            <div class="empty-state">
+              <div class="empty-visual" aria-hidden="true">
+                <svg viewBox="0 0 260 180" role="img">
+                  <rect x="24" y="24" width="212" height="132" rx="8" fill="#ffffff" stroke="#c8d1de" />
+                  <path d="M52 128 L106 72 L148 104 L202 48" fill="none" stroke="#1f7a68" stroke-width="5" />
+                  <circle cx="106" cy="72" r="6" fill="#ef8354" />
+                  <circle cx="148" cy="104" r="6" fill="#3d5a80" />
+                  <path d="M52 132 H208" stroke="#9aa6b8" stroke-width="2" />
+                </svg>
+              </div>
+              <h3>把题目放进左侧，我会生成步骤和图</h3>
+              <p>当前版本离线运行，适合常见函数图像、斜面受力、实验装置和结构理解题。</p>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <div id="toast" role="status" aria-live="polite"></div>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
